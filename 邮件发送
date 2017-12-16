@@ -1,0 +1,72 @@
+#!/usr/bin/python
+# -*- coding:utf-8 -*=
+
+
+import smtplib
+from email.mime.text import  MIMEText
+from email.header import Header
+import time
+import datetime
+import random
+import json
+import urllib2
+
+#手机提醒发送
+def semoblie():
+    url = "http://jiudian.meituan.com/api/v1/mta/sc/bizself/biz/verifyCode"
+
+    para = {
+        "mobile": "xxxxxxxxx"
+    }
+    data_encode = json.dumps(para)
+    req = urllib2.Request(url, data_encode)
+    req.add_header('User-Agent',
+                   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36')
+    req.add_header('Content-Type', 'application/json')
+    req.add_header('Accept', 'application/json')
+    req.add_header('cookie',
+                   'rvct=1; _lxsdk_cuid=15ee5410c7930-07f02f40bfe314-e313761-100200-15ee5410c7b1d; mtcdn=K; u=131158587; n=hgyearn; lt=Enf_cDbAw5KdkhO5ECNIeB6jP-UAAAAA0wQAAAx7S7shd4Bf5MEzTB7-obhn3b2vgkAVrQtPDkLVImE-5Tq9wnY4ooTjrXY3I30l7g; lsu=; SID=r0db3plg175329v6ppr9dcf1k2; __mta=253073334.1507084801351.1508515653297.1508559819260.5; vipnotice_131158587=%7B%22status%22%3Atrue%2C%22growthValue%22%3A316%2C%22showLevel%22%3A2%2C%22noticeType%22%3A0%2C%22noticeValue%22%3A0%2C%22cityid%22%3A1%7D; __utma=211559370.93561226.1508513867.1508513867.1508558634.2; __utmb=211559370.41.9.1508559832919; __utmc=211559370; __utmz=211559370.1508513867.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); uuid=8d1bba0cc89455774f69.1507084795.1.0.1; oc=BfTJ79Q4-d51-fnJBzfMQ5Xs-7Wl85YxnnLKBhTb5xQ6ojkdK8Z4eU-KuPqJW5O2UA2cG3Q9C39fWXbf9Qc0b_SeE8m55hPXC3oe7bCyZtkZhl_CNUDswWRIgpHHqklfKCLPT-ZgJwI2hAjEKD6sWFBUfMvg6BzuFB0-mkVMwUM; ci=1; _ga=GA1.2.93561226.1508513867; _gid=GA1.2.179673212.1508561101; bsbsid=g4Cmjyx7xBeQgwxnWeqDbDDco5lvACgkznTpHY4cjijtt0M68kB-uorAyk3pzRoXJ_WTGyRbC5lyXBO54Q8PVA; _lxsdk_s=15f3d19fa54-c6-2c7-391%7C%7C106')
+    resp = urllib2.urlopen(req)
+    respInfo = resp.info()
+    print respInfo
+xxxxxxx
+# 邮件发送
+def set():
+    sender = 'xxxxxxx@163.com'
+    receiver = '920832807@qq.com'
+    subjecte = 'this is test ,nidadaye!! '
+    smtpserver = 'smtp.163.com'
+    username = "xxxxxxxx"
+    password = "xxxxxxxxx"
+
+
+    msg = MIMEText('Python 邮件发送测试...', 'plain', 'utf-8')
+    msg['Subject'] = Header(subjecte,'utf-8')
+    msg['From'] = sender
+    msg['To'] = receiver
+    try:
+        smtp = smtplib.SMTP()
+        smtp.connect(smtpserver,25)
+        smtp.login(username,password)
+        smtp.sendmail(sender,receiver,msg.as_string())
+        smtp.quit()
+        print "邮件发送成功！"
+    except smtplib.SMTPException:
+        print "Error: 无法发送邮件"
+
+def Tim():
+    T = random.randint(0, 50)  # 随机产生一个数
+    print T
+    print  datetime.datetime.now()  # 显示当前时间
+    print time.mktime(datetime.datetime.now().timetuple())  # 输出对应的时间撮
+    return T
+if __name__ == '__main__':
+    count = 0
+    while count < 5 :
+        print "this is %d 封邮发送：" %count
+        count = count + 1
+        set()
+        Tim()
+        time.sleep(10)                           # 延时T秒
+
+print "发送完毕！"
