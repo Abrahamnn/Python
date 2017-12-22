@@ -1,0 +1,17 @@
+import re
+
+
+def Ti ():
+    fp = open('gov.cn.txt',"r")
+    for line in fp:
+    #file_text = fp.readline()
+        letter_str = re.findall(r'[^0-9]+',line)
+        print letter_str[0]
+        fw = open('domain.txt','a')
+        fw.write(letter_str[0]+'\n')
+        fw.close()
+    fp.close()
+    return
+
+if __name__ == '__main__':
+    Ti()
